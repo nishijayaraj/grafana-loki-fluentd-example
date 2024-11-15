@@ -25,6 +25,8 @@ View Logs via loki
 ==================
 
 Grafana Home ->  Explore --> Logs ( Choose appropriate label names to narrow down the search
+
+![loki](https://github.com/user-attachments/assets/b7511792-4b30-4336-90c2-a9950a240fc1)
   
 
-![loki](https://github.com/user-attachments/assets/f2b23930-5929-458a-aea3-be6c41c9356b)
+
