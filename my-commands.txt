@@ -1,0 +1,17 @@
+Up greenhouse app
+=================
+docker compose -f loki-fundamentals/greenhouse/docker-compose-micro.yml up -d --build
+
+docker compose -f loki-fundamentals/greenhouse/docker-compose-micro.yml restart
+
+docker compose -f loki-fundamentals/greenhouse/docker-compose-micro.yml down
+
+url : localhost:5005
+
+
+Loki/grafana
+=============
+hp@hp-HP-Laptop-15s-fq4xxx:~/Documents/loki/loki-fundamentals$ docker compose up -d
+
+hp@hp-HP-Laptop-15s-fq4xxx:~/Documents/loki$ docker compose -f loki-fundamentals/docker-compose.yml down
+

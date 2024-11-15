@@ -1,0 +1,52 @@
+version: '3'
+services:
+  fluentd:
+    image: grafana/fluent-plugin-loki:main
+    command:
+      - "fluentd"
+      - "-v"
+      - "-p"
+      - "/fluentd/plugins"
+    environment:
+      FLUENTD_CONF: fluentd.conf
+    ports:
+      - "24224:24224"
+    volumes:
+      - ./fluentd.conf:/fluentd/etc/fluentd.conf
+    depends_on:
+      - loki
+    networks:
+      - loki
+  
+  loki:
+    image: grafana/loki:main
+    ports:
+      - "3100:3100"
+    volumes:
+      - ./loki-config.yaml:/etc/loki/local-config.yaml
+    command: -config.file=/etc/loki/local-config.yaml
+    networks:
+      - loki
+  grafana:
+    image: grafana/grafana:latest
+    environment:
+      - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
+      - GF_AUTH_ANONYMOUS_ENABLED=true
+      - GF_AUTH_BASIC_ENABLED=false
+      - GF_FEATURE_TOGGLES_ENABLE=accessControlOnCall
+      - GF_INSTALL_PLUGINS=https://storage.googleapis.com/integration-artifacts/grafana-lokiexplore-app/grafana-lokiexplore-app-latest.zip;grafana-lokiexplore-app
+    ports:
+      - 3000:3000/tcp
+    volumes:
+      - ./grafana:/etc/grafana/provisioning
+    networks:
+      - loki
+    
+networks:
+    loki:
+      external: true
+
+    
+
+
+    
